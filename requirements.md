@@ -22,5 +22,7 @@ This document shall keep track of next steps or ideas, primarily in the form of 
 ## (Continuously) realized
 
 - As a user which does not know much about Unix, cryptography and such, I don't want to spend much time learning these things before I can use my server, because I have better things to do.
+- As a user I want to have clear instructions what I could to do, as I do not have much time.
+- As a user I want to be comprehensible argumentations why something I could trust that solution.
 - As a user I want to have a private cloud.
 - As a user I want a system with a low total cost of ownership, because I want to save money.
