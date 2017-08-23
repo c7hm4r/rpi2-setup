@@ -7,18 +7,15 @@ If you want to use the Pi as a backup server, you might want to store more data 
 
 - Hard drives with no separate power supply may sometimes consume too much power from the Pi, especially when accellerating the disk. Alternatives are hard drives with separate power supply or SSDs.
 
-It depends on the reliability of your power source if you should use a uninteruptible power supply (UPS). Some have even a high current USB port (TODO: StromPi 2).
+It depends on the reliability of your power source if you should use a uninteruptible power supply (UPS). Some have even a high current USB port (TODO: StromPi 2, test with current-hungry hdd).
 
 ## Installation
 
 1. In the Raspbian desktop environment,
     open a terminal—for example via Ctrl+Alt+T
 1. In that terminal, run the following commands
-       sudo apt-get update
-       sudo apt-get install git software-properties-common
-       sudo apt-add-repository ppa:ansible/ansible
-       sudo apt-get update
-       sudo apt-get install ansible
+
+        curl https://tiny.cc/rpi-setup-dev -sSfL | sh
 
 ## Contribute
 

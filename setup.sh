@@ -4,7 +4,7 @@ set -e
 set -x
 
 sudo apt-get update
-sudo apt-get install git software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
+sudo apt-get install -y ansible
+git clone https://github.com/c7hm4r/rpi2-setup.git setup
+cd setup
+
