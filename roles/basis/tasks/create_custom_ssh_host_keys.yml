@@ -1,0 +1,30 @@
+- name: remove existing host keys
+  shell: trash -v /etc/ssh/ssh_host_*key
+- name: recreate keys
+  command: dpkg-reconfigure openssh-server
+- name: compute sha256 fingerprints
+  shell: >
+    awk '{print $2}' "{{item}}" |
+    base64 -d |
+    sha256sum -b |
+    awk '{print $1}' |
+    xxd -r -p |
+    base64
+  with_fileglob:
+    - /etc/ssh/ssh_host_*key.pub
+  register: ssh_host_sha_fingerprint_results
+- name: compute default fingerprints (md5)
+  command: ssh-keygen -l -f "{{item}}"
+  with_fileglob:
+    - /etc/ssh/ssh_host_*key.pub
+  register: ssh_host_default_fingerprint_results
+- name: show fingerprints
+  debug:
+    msg: "SSH fingerprint: {{item.stdout}}"
+  with_flattened:
+    - "{{ssh_host_sha_fingerprint_results}}"
+    - "{{ssh_host_default_fingerprint_results}}"
+- name: restart sshd
+  systemd:
+    name: sshd.service
+    state: restarted

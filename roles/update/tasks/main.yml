@@ -1,0 +1,21 @@
+- name: APT-Cache aktualisieren
+  apt:
+    update_cache: true
+- name: Alle APT-Pakete aktualisieren
+  apt:
+    upgrade: dist
+- name: Debian-Goodies installieren (für checkrestart)
+  apt:
+    name: debian-goodies
+    state: present
+- name: run checkrestart
+  command: checkrestart
+  register: checkrestart_result
+  changed_when: >
+    checkrestart_result.stdout is undefined or
+    checkrestart_result.stdout != no_restart_needed_output
+- name: reboot if required
+  shell: systemctl reboot && false
+  when: >
+    checkrestart_result.stdout is undefined or
+    checkrestart_result.stdout != no_restart_needed_output

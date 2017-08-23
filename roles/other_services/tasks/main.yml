@@ -1,0 +1,6 @@
+- name: open firewall ports
+  ufw:
+    rule: allow
+    direction: incoming
+    to_port: "{{item}}"
+  with_items: []

@@ -1,0 +1,78 @@
+---
+- name: install packages
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - trash-cli
+    - ufw
+
+# Firewall
+- name: enable ufw
+  ufw:
+    state: enabled
+- name: deny incoming traffic
+  ufw:
+    policy: deny
+    direction: incoming
+- name: allow outgoing traffic
+  ufw:
+    policy: allow
+    direction: outgoing
+
+# SSHD
+- name: enable sshd port
+  ufw:
+    rule: allow
+    direction: in
+    to_port: 22
+    proto: tcp
+
+- name: enable sshd
+  systemd:
+    name: sshd.service
+    enabled: yes
+    masked: no
+- name: start sshd
+  systemd:
+    name: sshd.service
+    state: started
+
+## SSH host keys
+# - name: check custom keys flag
+#   command: test -f "{{custom_ssh_host_keys_file}}"
+#   register: custom_ssh_host_keys_created
+#   ignore_errors: yes
+# - name: create custom host keys
+#   include: create_custom_ssh_host_keys.yml
+#   when: custom_ssh_host_keys_created.rc != 0
+# - name: create custom host keys flag
+#   copy:
+#     content: ""
+#     dest: "{{custom_ssh_host_keys_file}}"
+#     owner: root
+#     group: root
+#     mode: u=rw,g=r,o=r
+#   when: custom_ssh_host_keys_created.rc != 0
+
+## Configure ssh server
+- name: copy sshd_config
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+- name: restart sshd
+  systemd:
+    name: sshd.service
+    state: restarted
+
+- name: enable ipv6
+  modprobe:
+    name: ipv6
+    state: present
+- name: add ipv6 to /etc/modules
+  lineinfile:
+    line: ipv6
+    state: present

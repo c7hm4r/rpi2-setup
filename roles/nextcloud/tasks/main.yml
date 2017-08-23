@@ -1,0 +1,43 @@
+---
+# Compatibility check
+- name: Check OS-Version
+  fail: msg="Only Debian 8 (Jessie) is supported"
+  when: ansible_distribution != "Debian" or ansible_distribution_major_version != "8"
+
+# Set up php web server with compatibility for MySQL
+- name: install nginx
+  apt:
+    name: nginx
+    state: present
+
+## TLS konfigurieren
+- name: Install Diffie Hellmann ephemeral
+  when: not generate_new_dhparam
+  copy:
+    backup: yes
+    group: root
+    owner: root
+    mode: u=rw,g=r,o=r
+    dest: "{{dhparam_path}}"
+    src: dhparam.pem
+- name: Generate new Diffie Hellmann ephemeral. This may take some time
+  when: generate_new_dhparam
+  command: openssl dhparam -out {{dhparam_path}} 4096
+
+- name: install PHP
+  apt:
+    name: php5
+    state: present
+- name: install PHP-MySQL integration
+  apt:
+    name: php5-mysql
+    state: present
+- name: Install PHP-FPM
+  apt:
+    name: php5-fpm
+    state: present
+- name: install PHP-CLI
+  apt:
+    name: php5-cli
+    state: present
+

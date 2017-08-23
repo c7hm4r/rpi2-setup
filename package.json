@@ -1,0 +1,14 @@
+{
+  "name": "ansible-conf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@git.drubn.de:ansible-conf",
+  "author": "Christoph Müller <iblzm@hotmail.de>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^0.14.3"
+  },
+  "scripts": {
+    "precommit": "ansible-lint main.yml && ansible-playbook --syntax-check main.yml"
+  }
+}

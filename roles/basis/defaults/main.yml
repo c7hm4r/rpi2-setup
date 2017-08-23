@@ -1,0 +1,5 @@
+ip_address: "192.168.2.201"
+net_mask_bits: "24"
+router_address: "192.168.1.1"
+domain_name_servers: 85.214.20.141 204.152.184.76 194.150.168.168 213.73.91.35
+interface_name: eth0
