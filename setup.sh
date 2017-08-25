@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 export repo_url=https://github.com/c7hm4r/rpi2-setup.git
 export dest_dir=$HOME/rpi2-setup
 
