@@ -18,3 +18,4 @@ else
     git stash pop --index
 fi
 
+bash
