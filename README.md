@@ -15,7 +15,7 @@ It depends on the reliability of your power source if you should use a uninterup
     open a terminal—for example via Ctrl+Alt+T
 1. In that terminal, run the following commands
 
-        curl https://tiny.cc/rpi-setup-dev -sSfL | sh
+        curl https://tiny.cc/rpi-setup-dev -sSfL | . sh
 
 ## Contribute
 
