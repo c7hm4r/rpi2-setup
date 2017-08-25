@@ -3,7 +3,7 @@
 export repo_url=https://github.com/c7hm4r/rpi2-setup.git
 export dest_dir=$HOME/rpi2-setup
 
-bash <<'EOF'
+(bash <<'EOF'
 set -e
 set -x
 
@@ -36,6 +36,7 @@ else
         git stash pop --index
     fi
 fi
-EOF && echo "Result: Configuration successful" || echo "Result: An error occured"
+EOF
+) && echo "Result: Configuration successful" || echo "Result: An error occured"
 
 cd "$dest_dir"
