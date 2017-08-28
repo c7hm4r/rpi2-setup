@@ -10,6 +10,11 @@ This document shall keep track of next steps or ideas, primarily in the form of 
 
 ## Backlog
 
+- Do not rely on tiny.cc.
+- Create release branch which is the base for the initial setup command.
+- Do not show `meld` when there are no differences.
+- Do not use fragile stashing procedure — just add everything, commit and pull; configure meld for this repository as mergetool, if nothing is configured yet globally.
+- Use [nsupdate.info](https://www.nsupdate.info/) to setup DynDNS.
 - As a user I want the homepage and later services secured with TLS to prevent hackers sniffing my data.
 - As a user I want a fixed domain for my server to enable easy access from the internet.
 - As a user I want to have a simple status homepage under a fixed domain which proves that the server is online and that TLS works, because I want to know if the system could work in principal if I configure further services later.
