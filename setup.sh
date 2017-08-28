@@ -1,19 +1,25 @@
-#!/bin/bash
+#!/bin/sh
+
+(bash <<'EOF'
 
 export repo_url=https://github.com/c7hm4r/rpi2-setup.git
 export dest_dir=$HOME/rpi2-setup
+export custom_playbook_path=main.custom.yml
+export template_playbook_path=main.template.yml
+export base_template_playbook_path=main.template.base.yml
+export new_custom_playbook_path=main.new.yml
 
-(bash <<'EOF'
 set -e
 set -x
 
-sudo apt-get update
+#TODO: Uncomment
+#sudo apt-get update
 sudo apt-get install --yes ansible
 
-if [ ! -d rpi2-setup ]
+if [ ! -d "$dest_dir" ]
 then
-    git clone "$repo_url" "$repo_name"
-    cd "$repo_name"
+    git clone "$repo_url" "$dest_dir"
+    cd "$dest_dir"
 else
     cd "$dest_dir"
 
@@ -36,7 +42,29 @@ else
         git stash pop --index
     fi
 fi
-EOF
-) && echo "Result: Configuration successful" || echo "Result: An error occured"
 
-cd "$dest_dir"
+if [ ! -e "$custom_playbook_path" ]
+then
+    cp "$template_playbook_path" "$custom_playbook_path"
+    cp "$template_playbook_path" "$base_template_playbook_path"
+else
+    sudo apt-get install meld trash-cli
+    trash "$new_custom_playbook_path"
+    meld -o "$new_custom_playbook_path" "$custom_playbook_path" "$template_playbook_path" "$base_template_playbook_path"
+    if [ -e "$new_custom_playbook_path" ]
+    then
+        trash "$custom_playbook_path"
+        mv "$new_custom_playbook_path" "$custom_playbook_path"
+        cp "$template_playbook_path" "$base_template_playbook_path"
+    fi      
+fi
+
+# TODO: Show dialog (file shall be saved and editor closed)
+# TODO: Show "waiting for editor to close" in terminal
+# xdg-open main.yml
+
+ansible-playbook "$custom_playbook_path"
+
+EOF
+) && echo "Result: Configuration successful" ||
+    { echo "Result: An error occured" && exit 255; }

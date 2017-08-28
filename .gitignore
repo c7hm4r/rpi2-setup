@@ -78,4 +78,7 @@ package-lock.json
 
 # End of https://www.gitignore.io/api/node
 
-/external-roles/
+/ansible/external-roles/
+/main.yml
+/main.template.base.yml
+/main.new.yml
