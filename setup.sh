@@ -63,7 +63,7 @@ then
 else
     trash "$new_custom_playbook_path" || true
     git merge-file -p "$custom_playbook_path" "$base_template_playbook_path" "$template_playbook_path" > "$new_custom_playbook_path" || true
-    meld "$custom_playbook_path" "$base_template_playbook_path" "$template_playbook_path" -o "$new_custom_playbook_path" --auto-merge
+    meld "$custom_playbook_path" "$base_template_playbook_path" "$template_playbook_path" --output "$new_custom_playbook_path" --auto-merge
     if [ -e "$new_custom_playbook_path" ]
     then
         trash "$custom_playbook_path"
@@ -76,7 +76,8 @@ fi
 # TODO: Show "waiting for editor to close" in terminal
 # xdg-open main.yml
 
-ansible-playbook "$custom_playbook_path"
+ansible-playbook "$custom_playbook_path" \
+    --extra-vars="rpi2_conf_initial_user=$(whoami)"
 
 EOF
 ) && echo "Result: Configuration successful" ||

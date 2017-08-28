@@ -1,0 +1,6 @@
+---
+- name: install ansible roles
+  command: ansible-galaxy install -r requirements.yml
+  become: '{{ rpi2_conf_initial_user }}'
+  register: ansible_galaxy_install_result
+  changed_when: "'- downloading ' in ansible_galaxy_install_result.stdout"
