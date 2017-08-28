@@ -49,7 +49,7 @@ then
     cp "$template_playbook_path" "$base_template_playbook_path"
 else
     trash "$new_custom_playbook_path" || true
-    meld -o "$new_custom_playbook_path" "$custom_playbook_path" "$template_playbook_path" "$base_template_playbook_path"
+    meld "$custom_playbook_path" "$base_template_playbook_path" "$template_playbook_path" -o "$new_custom_playbook_path" --auto-merge
     if [ -e "$new_custom_playbook_path" ]
     then
         trash "$custom_playbook_path"
