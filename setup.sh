@@ -7,14 +7,14 @@ export dest_dir=$HOME/rpi2-setup
 export custom_playbook_path=main.custom.yml
 export template_playbook_path=main.template.yml
 export base_template_playbook_path=main.template.base.yml
-export new_custom_playbook_path=main.new.yml
+export new_custom_playbook_path=main.custom.merged.yml
 
 set -e
 set -x
 
 #TODO: Uncomment
 #sudo apt-get update
-sudo apt-get install --yes ansible
+sudo apt-get install --yes ansible meld trash-cli
 
 if [ ! -d "$dest_dir" ]
 then
@@ -48,7 +48,6 @@ then
     cp "$template_playbook_path" "$custom_playbook_path"
     cp "$template_playbook_path" "$base_template_playbook_path"
 else
-    sudo apt-get install meld trash-cli
     trash "$new_custom_playbook_path"
     meld -o "$new_custom_playbook_path" "$custom_playbook_path" "$template_playbook_path" "$base_template_playbook_path"
     if [ -e "$new_custom_playbook_path" ]
