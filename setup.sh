@@ -23,6 +23,18 @@ then
 else
     cd "$dest_dir"
 
+    # Basic git configuration needed to stash
+    if ! git config --get user.email
+    then
+        git config user.email "john.doe@example.com"
+    fi
+
+    if ! git config --get user.name
+    then
+        git config user.name "John Doe"
+    fi
+
+    # Check if repo modified
     repo_modified=0
     if ! git ls-files --other --directory --exclude-standard \
             --no-empty-directory | sed q1 || \
@@ -32,6 +44,7 @@ else
         repo_modified=1
     fi
 
+    # Update repo
     if [ "$repo_modified" -eq 1 ]
     then
         git stash --include-untracked --keep-index
