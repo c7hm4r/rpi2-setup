@@ -48,7 +48,7 @@ then
     cp "$template_playbook_path" "$custom_playbook_path"
     cp "$template_playbook_path" "$base_template_playbook_path"
 else
-    trash "$new_custom_playbook_path"
+    trash "$new_custom_playbook_path" || true
     meld -o "$new_custom_playbook_path" "$custom_playbook_path" "$template_playbook_path" "$base_template_playbook_path"
     if [ -e "$new_custom_playbook_path" ]
     then
