@@ -5,7 +5,25 @@
 set -e
 set -x
 
-sudo apt-get install --yes ansible
+playbook_path=main.yml
 
-ansible-playbook "$custom_playbook_path" \
+# copied from update-repo-and-install.sh
+function install_package()
+{
+    package_name=$1
+    # From https://superuser.com/a/427339
+    if ! dpkg-query -Wf'${db:Status-abbrev}' "$package_name" 2> /dev/null | grep -q '^i'
+    then
+        if [ -z "$apt_updated" ]
+        then
+            sudo apt-get update
+            export apt_updated=1
+        fi
+        sudo apt-get install --yes "$package_name"
+    fi
+}
+
+install_package ansible
+
+ansible-playbook "$playbook_path" \
     --extra-vars="rpi2_conf_initial_user=$(whoami)"

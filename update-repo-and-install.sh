@@ -9,18 +9,17 @@ repo_url=https://github.com/c7hm4r/rpi2-setup.git
 dest_dir=$HOME/rpi2-setup
 install_script_path=$dest_dir/install.sh
 
-apt_updated=0
-
+# copied to install.sh
 function install_package()
 {
     package_name=$1
     # From https://superuser.com/a/427339
     if ! dpkg-query -Wf'${db:Status-abbrev}' "$package_name" 2> /dev/null | grep -q '^i'
     then
-        if [ "$apt_updated" -eq 0 ]
+        if [ -z "$apt_updated" ]
         then
             sudo apt-get update
-            apt_updated=1
+            export apt_updated=1
         fi
         sudo apt-get install --yes "$package_name"
     fi
