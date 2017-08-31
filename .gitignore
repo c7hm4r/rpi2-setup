@@ -81,7 +81,4 @@ package-lock.json
 *.orig
 
 /ansible/external-roles/
-
-/main.custom.yml
-/main.template.base.yml
-/main.custom.merged.yml
+/custom/
