@@ -72,8 +72,9 @@ else
     fi
 
     # Update repo
+    unset return_code
     git pull || return_code=$?
-    if [ "$return_code" != 1 ]
+    if [ ( -n "$return_code" ) -a ( "$return_code" != 1 ) ]
     then
         exit "$return_code"
     fi
