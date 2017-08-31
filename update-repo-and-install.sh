@@ -72,9 +72,11 @@ else
     fi
 
     # Update repo
-    git pull
-
-    # Merge and commit
+    git pull || return_code=$?
+    if [ "$return_code" != 1 ]
+    then
+        exit "$return_code"
+    fi
     git mergetool
     git commit -m 'automatic merge' || true
 fi
