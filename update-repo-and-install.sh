@@ -77,7 +77,7 @@ else
     then
         exit "$return_code"
     fi
-    lxterminal --no-remote --command='git mergetool' \
+    lxterminal --no-remote --command='sleep 0.5 && git mergetool' \
         --title='Decide which version to use'
     git commit -m 'automatic merge' || true
 fi
