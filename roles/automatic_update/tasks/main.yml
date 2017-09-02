@@ -21,6 +21,7 @@
 - name: Cron environment variable
   cronvar:
     cron_file: '{{rpi2_conf_automatic_reboot_cronfile_name}}'
+    user: root
     name: '{{item.name}}'
     value: '{{item.value}}'
   with_items:
@@ -45,5 +46,6 @@
   cron:
     name: 'automatic reboot'
     cron_file: '{{rpi2_conf_automatic_reboot_cronfile_name}}'
+    user: root
     job: '{{rpi2_conf_automatic_reboot_script_path}}'
     minute: 2
