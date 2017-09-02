@@ -1,0 +1,17 @@
+---
+# Parameters used in the script
+
+rpi2_conf_failed_reboot_since_file: /usr/local/var/automatic_reboot/failed_reboot_since
+rpi2_conf_failed_urgent_reboot_since_file: /usr/local/var/automatic_reboot/failed_urgent_reboot_since
+
+rpi2_conf_failed_reboot_timeout: '{{60 * 60 * 24 * 3}}'
+rpi2_conf_failed_urgent_reboot_timeout: '{{60 * 60}}'
+rpi2_conf_time_to_log_out: '{{60 * 10}}'
+
+rpi2_conf_no_restart_needed_output: 'Found 0 processes using old versions of upgraded files'
+rpi2_conf_reboot_wall_message: 'The system reboots in 10 minutes. Please save your data and log out.'
+rpi2_conf_reboot_deferred_message: 'The systems needs to reboot. Please log out.'
+
+
+rpi2_conf_automatic_reboot_cronfile_name: rpi2_conf_automatic_reboot
+rpi2_conf_automatic_reboot_script_path: /usr/local/bin/rpi2_conf/automatic_reboot.sh

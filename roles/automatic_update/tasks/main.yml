@@ -1,0 +1,42 @@
+---
+- name: Debian-Goodies installieren (für checkrestart)
+  apt:
+    name: debian-goodies
+    state: present
+- name: Copy cronjob script
+  copy:
+    src: automatic_reboot.sh
+    dest: '{{rpi2_conf_automatic_reboot_script_path}}'
+    mode: u=rwx,g=r,o=r
+    owner: root
+    group: root
+
+- name: Cron environment variable
+  cronvar:
+    cron_file: '{{rpi2_conf_automatic_reboot_cronfile_name}}'
+    name: '{{item.name}}'
+    value: '{{item.value}}'
+  with_items:
+    - name: failed_reboot_since_file
+      value: '{{rpi2_conf_failed_reboot_since_file}}'
+    - name: failed_urgent_reboot_since_file
+      value: '{{rpi2_conf_failed_urgent_reboot_since_file}}'
+    - name: failed_reboot_timeout
+      value: '{{rpi2_conf_failed_reboot_timeout}}'
+    - name: failed_urgent_reboot_timeout
+      value: '{{rpi2_conf_failed_urgent_reboot_timeout}}'
+    - name: time_to_log_out
+      value: '{{rpi2_conf_time_to_log_out}}'
+    - name: no_restart_needed_output
+      value: '{{rpi2_conf_no_restart_needed_output}}'
+    - name: reboot_wall_message
+      value: '{{rpi2_conf_reboot_wall_message}}'
+    - name: reboot_deferred_message
+      value: '{{rpi2_conf_reboot_deferred_message}}'
+
+- name: Cronjob
+  cron:
+    name: 'automatic reboot'
+    cron_file: '{{rpi2_conf_automatic_reboot_cronfile_name}}'
+    job: '{{rpi2_conf_automatic_reboot_script_path}}'
+    minute: 2

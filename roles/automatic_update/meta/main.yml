@@ -1,0 +1,9 @@
+---
+dependencies:
+  - role: unattended-upgrades
+    unattended_origins_patterns:
+    # all Raspbian updates
+    - 'origin=Raspbian,codename=${distro_codename},label=Raspbian'
+    unattended_autofix_interrupted_dpkg: true
+    unattended_remove_unused_dependencies: true
+    unattended_ignore_apps_require_restart: true
