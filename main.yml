@@ -16,7 +16,7 @@
     # These roles should always be included
 
     # Roles shall be configurable as needed
-    - automatic_update
+    #- automatic_update
 
     #- update
     #- basis
