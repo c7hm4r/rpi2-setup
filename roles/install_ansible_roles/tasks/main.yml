@@ -1,6 +1,0 @@
----
-- name: install ansible roles
-  command: ansible-galaxy install -r requirements.yml
-  become: '{{ rpi2_conf_initial_user }}'
-  register: ansible_galaxy_install_result
-  changed_when: "' to {{rpi2_conf_repository_path}}/{{rpi2_conf_ansible_external_roles_dir}}' in ansible_galaxy_install_result.stdout"

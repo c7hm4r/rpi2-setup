@@ -7,7 +7,7 @@
     - vars/main.yml
   roles:
     # These roles should always be included
-    - install_ansible_roles
+    # —currently none—
 
     # Roles shall be configurable as needed
     - automatic_update
