@@ -48,6 +48,8 @@ function update_reboot_required_file()
         if (( "$(cat "$failed_reboot_since_file")" + "$failed_reboot_timeout" <= "$current_date" ))
         then
             reboot=1
+        else
+            reboot_deferred=1
         fi
     else
         rm "$failed_reboot_since_file" || true
@@ -62,6 +64,7 @@ fi
 
 current_date=$(date +%s)
 unset reboot
+unset reboot_deferred
 
 # if someone is logged in
 if [ -n "$(who)" ]
@@ -74,14 +77,15 @@ then
     then
         wall "$reboot_wall_message"
         sleep "$time_to_log_out"
-    else
+    elif [ -n "$reboot_deferred" ]
+    then
         wall "$reboot_deferred_message"
     fi
 else
     reboot=1
 fi
 
-if [ -n "$reboot"]
+if [ -n "$reboot" ]
 then
     rm "$failed_reboot_since_file" || true
     rm "$failed_urgent_reboot_since_file" || true
