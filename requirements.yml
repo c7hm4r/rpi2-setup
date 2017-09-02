@@ -1,4 +1,4 @@
 ---
-- scr: https://github.com/c7hm4r/ansible-role-unattended-upgrades
+- src: https://github.com/c7hm4r/ansible-role-unattended-upgrades
   version: master
   name: unattended-upgrades
