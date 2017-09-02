@@ -58,7 +58,7 @@ else
     if ! git diff-index --cached --quiet HEAD --ignore-submodules --
     then
         # Commit them
-        git commit -m 'automatic index commit'
+        git commit --message='automatic index commit' --no-verify
     fi
 
     # If there are uncommitted changes in working directory ...
@@ -67,8 +67,8 @@ else
         ! git diff-files --quiet --ignore-submodules --
     then
         # Commit them
-        git add -A
-        git commit -m 'automatic working directory commit'
+        git add --all
+        git commit --message='automatic working directory commit' --no-verify
     fi
 
     # Update repo
@@ -80,7 +80,12 @@ else
     fi
     lxterminal --no-remote --command='sleep 0.5 && git mergetool' \
         --title='Decide which version to use'
-    git commit -m 'automatic merge' || true
+    if [ -n "$(git ls-files --unmerged)" ]
+    then
+        echo "There are unmerged files. Please run \"git mergetool\" again to resolve them. Then you can run this script again."
+        exit 1
+    fi
+    git commit --message='automatic merge' --no-verify || true
 fi
 
 bash "$install_script_path"
