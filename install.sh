@@ -27,4 +27,5 @@ install_package ansible
 
 ansible-galaxy install -r requirements.yml
 
-ansible-playbook "$playbook_path"
+ansible-playbook "$playbook_path" \
+    --extra-vars="rpi2_conf_initial_user=\"$(whoami)\" rpi2_conf_repository_path=\"$(pwd)\""

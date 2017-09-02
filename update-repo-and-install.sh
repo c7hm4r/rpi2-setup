@@ -25,9 +25,6 @@ function install_package()
     fi
 }
 
-# meld is needed as git merge tool
-install_package meld
-
 if [ ! -d "$dest_dir" ]
 then
     git clone "$repo_url" "$dest_dir"
@@ -51,6 +48,9 @@ else
 
     if ! git config --get merge.tool
     then
+        # TODO use non-graphical mergetool if no desktop environment
+        # meld is needed as git merge tool
+        install_package meld
         git config merge.tool "meld"
     fi
 
@@ -80,6 +80,7 @@ else
     fi
     if [ -n "$(git ls-files --unmerged)" ]
     then
+        # TODO: Do not use this when there is no desktop environment
         lxterminal --no-remote --command='sleep 0.5 && git mergetool' \
             --title='Decide which version to use'
         if [ -n "$(git ls-files --unmerged)" ]
