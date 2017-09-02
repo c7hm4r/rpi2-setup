@@ -10,6 +10,7 @@
     - install_ansible_roles
 
     # Roles shall be configurable as needed
+    - automatic_update
 
     #- update
     #- basis
