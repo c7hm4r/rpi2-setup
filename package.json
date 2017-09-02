@@ -9,6 +9,6 @@
     "husky": "^0.14.3"
   },
   "scripts": {
-    "precommit": "ansible-lint main.yml && ansible-playbook --syntax-check main.yml"
+    "precommit": "ansible-lint main.yml && ansible-playbook --syntax-check main.yml && find . -name '*.sh' '!' -path './ansible/external-roles/*' '!' -path './.git/*' -exec shellcheck '{}' +"
   }
 }

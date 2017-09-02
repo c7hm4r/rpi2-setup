@@ -2,16 +2,16 @@
 
 # Parameters
 
-# - failed_reboot_since_file
-# - failed_urgent_reboot_since_file
+# - FAILED_REBOOT_SINCE_FILE
+# - FAILED_URGENT_REBOOT_SINCE_FILE
 
-# - failed_reboot_timeout
-# - failed_urgent_reboot_timeout
-# - time_to_log_out
+# - FAILED_REBOOT_TIMEOUT
+# - FAILED_URGENT_REBOOT_TIMEOUT
+# - TIME_TO_LOG_OUT
 
-# - no_restart_needed_output
-# - reboot_wall_message
-# - reboot_deferred_message
+# - NO_RESTART_NEEDED_OUTPUT
+# - REBOOT_WALL_MESSAGE
+# - REBOOT_DEFERRED_MESSAGE
 
 
 function set_file_contents()
@@ -24,7 +24,7 @@ function set_file_contents()
 
 function reboot_required()
 {
-    ! checkrestart | grep -q "$no_restart_needed_output"
+    ! checkrestart | grep -q "$NO_RESTART_NEEDED_OUTPUT"
 }
 
 function urgent_reboot_required()
@@ -35,24 +35,24 @@ function urgent_reboot_required()
 function update_reboot_required_file()
 {
     local reboot_required_command=$1
-    local failed_reboot_since_file=$2
+    local FAILED_REBOOT_SINCE_FILE=$2
     local current_date=$3
-    local failed_reboot_timeout=$4
+    local FAILED_REBOOT_TIMEOUT=$4
 
     if "$reboot_required_command"
     then
-        if [ ! -f "$failed_reboot_since_file" ]
+        if [ ! -f "$FAILED_REBOOT_SINCE_FILE" ]
         then
-            set_file_contents "$failed_reboot_since_file" "$current_date"
+            set_file_contents "$FAILED_REBOOT_SINCE_FILE" "$current_date"
         fi
-        if (( "$(cat "$failed_reboot_since_file")" + "$failed_reboot_timeout" <= "$current_date" ))
+        if (( "$(cat "$FAILED_REBOOT_SINCE_FILE")" + "$FAILED_REBOOT_TIMEOUT" <= "$current_date" ))
         then
             reboot=1
         else
             reboot_deferred=1
         fi
     else
-        rm "$failed_reboot_since_file" || true
+        rm "$FAILED_REBOOT_SINCE_FILE" || true
     fi
 }
 
@@ -71,15 +71,15 @@ if [ -n "$(who)" ]
 then
     # TODO Set SSH Banner if not already done
 
-    update_reboot_required_file urgent_reboot_required "$failed_urgent_reboot_since_file" "$current_date" "$failed_urgent_reboot_timeout"
-    update_reboot_required_file reboot_required "$failed_reboot_since_file" "$current_date" "$failed_reboot_timeout"
+    update_reboot_required_file urgent_reboot_required "$FAILED_URGENT_REBOOT_SINCE_FILE" "$current_date" "$FAILED_URGENT_REBOOT_TIMEOUT"
+    update_reboot_required_file reboot_required "$FAILED_REBOOT_SINCE_FILE" "$current_date" "$FAILED_REBOOT_TIMEOUT"
     if [ -n "$reboot" ]
     then
-        wall "$reboot_wall_message"
-        sleep "$time_to_log_out"
+        wall "$REBOOT_WALL_MESSAGE"
+        sleep "$TIME_TO_LOG_OUT"
     elif [ -n "$reboot_deferred" ]
     then
-        wall "$reboot_deferred_message"
+        wall "$REBOOT_DEFERRED_MESSAGE"
     fi
 else
     reboot=1
@@ -87,7 +87,7 @@ fi
 
 if [ -n "$reboot" ]
 then
-    rm "$failed_reboot_since_file" || true
-    rm "$failed_urgent_reboot_since_file" || true
+    rm "$FAILED_REBOOT_SINCE_FILE" || true
+    rm "$FAILED_URGENT_REBOOT_SINCE_FILE" || true
     systemctl reboot
 fi

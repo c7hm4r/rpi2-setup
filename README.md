@@ -32,6 +32,8 @@ You can contribute in many ways. If you want to write code, please do that:
 
        pip2 install ansible-lint
 
+1. Install [shellcheck](https://github.com/koalaman/shellcheck#installing)
+
 Some conventions for more maintainable code:
 
 - In shell scripts, use long parameter names when possible. For example prefer `apt install --yes ansible` over `apt install -y ansible`.
