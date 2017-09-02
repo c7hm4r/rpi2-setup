@@ -5,6 +5,7 @@
 set -e
 set -x
 
+repository_path=$(pwd)
 playbook_path=main.yml
 
 # copied from update-repo-and-install.sh
@@ -26,4 +27,4 @@ function install_package()
 install_package ansible
 
 ansible-playbook "$playbook_path" \
-    --extra-vars="rpi2_conf_initial_user=$(whoami)"
+    --extra-vars="rpi2_conf_initial_user=$(whoami) rpi2_conf_repository_path=\"$(pwd)\""

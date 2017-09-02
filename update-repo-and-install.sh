@@ -78,14 +78,16 @@ else
     then
         exit "$return_code"
     fi
-    lxterminal --no-remote --command='sleep 0.5 && git mergetool' \
-        --title='Decide which version to use'
     if [ -n "$(git ls-files --unmerged)" ]
-    then
-        echo "There are unmerged files. Please run \"git mergetool\" again to resolve them. Then you can run this script again."
-        exit 1
+        lxterminal --no-remote --command='sleep 0.5 && git mergetool' \
+            --title='Decide which version to use'
+        if [ -n "$(git ls-files --unmerged)" ]
+        then
+            echo "There are still unmerged files. Please run \"git mergetool\" again to resolve them. Then you can run this script again."
+            exit 1
+        fi
+        git commit --message='automatic merge' --no-verify || true
     fi
-    git commit --message='automatic merge' --no-verify || true
 fi
 
 bash "$install_script_path"

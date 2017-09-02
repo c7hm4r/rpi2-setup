@@ -1,0 +1,2 @@
+---
+- rpi2_conf_ansible_external_roles_dir: ansible/external-roles
