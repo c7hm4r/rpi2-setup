@@ -3,6 +3,13 @@
   apt:
     name: debian-goodies
     state: present
+- name: Create directories
+  file:
+    path: '{{rpi2_conf_automatic_reboot_script_path | dirname}}'
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+    owner: root
+    group: root
 - name: Copy cronjob script
   copy:
     src: automatic_reboot.sh
