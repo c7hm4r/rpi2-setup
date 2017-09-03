@@ -5,7 +5,9 @@
 
 set -e
 
-alias errcho='>&2 echo'
+function errcho() {
+    >&2 echo "$@"
+}
 
 if ! [ -d "$RPI2_CONF_DEST_DIR/.git" ]; then
     errcho "Repository does not exist at configured path. Did you move it? Please manually run install.sh in that repository again."
