@@ -32,3 +32,4 @@ This document shall keep track of next steps or ideas, primarily in the form of 
     - Tasks
         - Create custom Raspbian image via [PiBakery](http://www.pibakery.org/).
 - As a user I want to have a graphical application which allows me to select the services I want, because maybe I don’t want to install everything.
+- As a user I want to prevent that my network is completely busy with the server requests, so I should throttle the speed of the server. (install wondershaper and estimate bandwidth by using a free distributed bandwidth measuring service)
