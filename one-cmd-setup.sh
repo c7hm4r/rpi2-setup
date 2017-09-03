@@ -7,7 +7,7 @@ if bash <<'EOF'
 set -e
 set -x
 
-install_repo_script_url='https://raw.githubusercontent.com/c7hm4r/rpi2-setup/master/install-repo-and-install.sh'
+install_repo_script_url='https://raw.githubusercontent.com/c7hm4r/rpi2-setup/master/setup-repo-and-install.sh'
 
 curl -fLsS -H 'Cache-Control: no-cache' "$install_repo_script_url?$(date +%s)" | bash
 

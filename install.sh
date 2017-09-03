@@ -7,7 +7,7 @@ set -x
 
 playbook_path=main.yml
 
-# copied from install-repo-and-install.sh
+# copied from setup-repo-and-install.sh
 function install_package() {
 	package_name=$1
 	# From https://superuser.com/a/427339
