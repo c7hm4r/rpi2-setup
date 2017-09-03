@@ -1,2 +1,3 @@
 ---
 - rpi2_conf_ansible_external_roles_dir: ansible/external-roles
+- rpi2_conf_bin_path: /usr/local/bin/rpi2_conf

@@ -10,7 +10,8 @@
     # —currently none—
 
     # Roles shall be configurable as needed
-    - automatic_update
+    - system_update
+    - repository_update
 
     #- update
     #- basis

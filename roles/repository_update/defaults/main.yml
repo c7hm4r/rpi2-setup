@@ -1,0 +1,5 @@
+---
+rpi2_conf_initial_user: 
+rpi2_conf_repository_path: 
+rpi2_conf_repository_update_script_path: '{{rpi2_conf_bin_path}}/update_existing_repo_and_install.sh'
+rpi2_conf_repository_update_cron_file: 'automatic_repository_update'

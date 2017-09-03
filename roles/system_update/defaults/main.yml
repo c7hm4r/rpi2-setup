@@ -14,4 +14,4 @@ rpi2_conf_reboot_deferred_message: 'The systems needs to reboot. Please log out.
 
 
 rpi2_conf_automatic_reboot_cronfile_name: rpi2_conf_automatic_reboot
-rpi2_conf_automatic_reboot_script_path: /usr/local/bin/rpi2_conf/automatic_reboot.sh
+rpi2_conf_automatic_reboot_script_path: '{{rpi2_conf_bin_path}}/automatic_reboot.sh'

@@ -11,4 +11,3 @@ This role configure automatic update of DPKG packages.
         - Probably SSH should be checked.
             - Then the pi must no stay always lo
     - Also the system should only be restarted when necessary and then at 03:00.
-- As a user I want to get fixes for this repository automatically.

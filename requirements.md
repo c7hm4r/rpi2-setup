@@ -24,6 +24,7 @@ This document shall keep track of next steps or ideas, primarily in the form of 
         - Collect information about the cost of the Pi and accessories. Document it on the page (remind that one possibly has some of the accessories at hand).
         - Collect information about the long term reliability of the Raspberry Pi and document the reliability findings in the repository
             - est. effort: 3 hours
+- As a user I want to be notified if an automatic job goes wrong, because I don't to to check it manually periodically.
 
 ## Options
 

@@ -1,0 +1,30 @@
+---
+- name: Create repository update script parent dir
+  file:
+    path: '{{rpi2_conf_repository_update_script_path | dirname}}'
+    status: directory
+    mode: u=rwx,g=rx,o=rx
+    owner: root
+    group: root
+- name: Copy script
+  copy:
+    src: update_existing_repo_and_install.sh
+    dest: '{{rpi2_conf_repository_update_script_path}}'
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+
+- name: Set cron file variables
+  cronvar:
+    cron_file: '{{rpi2_conf_repository_update_cron_file}}'
+    name: RPI2_CONF_DEST_DIR
+    value: '{{rpi2_conf_repository_path}}'
+
+- name: Install script in crontab
+  cron:
+    name: 'automatic repository update'
+    cron_file: '{{rpi2_conf_repository_update_cron_file}}'
+    user: '{{rpi2_conf_initial_user}}'
+    job: '{{rpi2_conf_repository_update_script_path}}'
+    minute: 32
+    hour: 3
