@@ -47,4 +47,4 @@
     cron_file: '{{rpi2_conf_automatic_reboot_cronfile_name}}'
     user: root
     job: '{{rpi2_conf_automatic_reboot_script_path}}'
-    minute: 2
+    minute: 2,12,22,32,42,52
