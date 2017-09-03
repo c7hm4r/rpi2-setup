@@ -14,6 +14,6 @@ fi
 
 cd "$RPI2_CONF_DEST_DIR"
 
-git pull
+git pull --no-edit
 
 "$RPI2_CONF_DEST_DIR/install.sh"

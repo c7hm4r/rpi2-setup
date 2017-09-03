@@ -2,7 +2,7 @@
 - name: Create repository update script parent dir
   file:
     path: '{{rpi2_conf_repository_update_script_path | dirname}}'
-    status: directory
+    state: directory
     mode: u=rwx,g=rx,o=rx
     owner: root
     group: root
