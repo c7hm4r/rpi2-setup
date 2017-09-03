@@ -13,6 +13,9 @@
 # - REBOOT_WALL_MESSAGE
 # - REBOOT_DEFERRED_MESSAGE
 
+set -e
+set -x
+
 function set_file_contents() {
 	local file_path=$1
 	local contents=$2
