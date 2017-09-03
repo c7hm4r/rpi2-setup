@@ -1,8 +1,11 @@
 ---
-- name: Debian-Goodies installieren (für checkrestart)
+- name: Install packages
   apt:
-    name: debian-goodies
+    name: '{{item}}'
     state: present
+  with_items:
+    - debian-goodies
+    - zenity
 - name: Create directories
   file:
     path: '{{rpi2_conf_automatic_reboot_script_path | dirname}}'

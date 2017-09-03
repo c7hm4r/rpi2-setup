@@ -31,23 +31,35 @@ function urgent_reboot_required() {
 	[ -f /var/run/reboot-required ]
 }
 
+# See https://askubuntu.com/q/12654
+function broadcast_message() {
+	local message=$1
+	echo "$message" | wall
+	(
+		cd /tmp/.X11-unix
+		for x in X*; do
+			zenity --warning --text "$message" --display=":${x#X}"
+		done
+	)
+}
+
 function update_reboot_required_file() {
 	local reboot_required_command=$1
-	local FAILED_REBOOT_SINCE_FILE=$2
+	local failed_reboot_since_file1=$2
 	local current_date=$3
-	local FAILED_REBOOT_TIMEOUT=$4
+	local failed_reboot_timeout1=$4
 
 	if "$reboot_required_command"; then
-		if [ ! -f "$FAILED_REBOOT_SINCE_FILE" ]; then
-			set_file_contents "$FAILED_REBOOT_SINCE_FILE" "$current_date"
+		if [ ! -f "$failed_reboot_since_file1" ]; then
+			set_file_contents "$failed_reboot_since_file1" "$current_date"
 		fi
-		if (($(cat "$FAILED_REBOOT_SINCE_FILE") + FAILED_REBOOT_TIMEOUT <= current_date)); then
+		if (($(cat "$failed_reboot_since_file1") + failed_reboot_timeout1 <= current_date)); then
 			reboot=1
 		else
 			reboot_deferred=1
 		fi
 	else
-		rm "$FAILED_REBOOT_SINCE_FILE" || true
+		rm "$failed_reboot_since_file1" || true
 	fi
 }
 
@@ -69,12 +81,13 @@ if [ -n "$(who)" ]; then
 	if [ -n "$reboot" ]; then
 		rm "$FAILED_REBOOT_SINCE_FILE" || true
 		rm "$FAILED_URGENT_REBOOT_SINCE_FILE" || true
-		shutdown -r "+$TIME_TO_LOG_OUT" "$REBOOT_WALL_MESSAGE"
+		broadcast_message "$REBOOT_WALL_MESSAGE"
+		shutdown --reboot --no-wall "+$TIME_TO_LOG_OUT" "$REBOOT_WALL_MESSAGE"
 	elif [ -n "$reboot_deferred" ]; then
-		echo "$REBOOT_DEFERRED_MESSAGE" | wall
+		broadcast_message "$REBOOT_DEFERRED_MESSAGE"
 	fi
 else
 	rm "$FAILED_REBOOT_SINCE_FILE" || true
 	rm "$FAILED_URGENT_REBOOT_SINCE_FILE" || true
-	shutdown -r now
+	shutdown --reboot now
 fi
