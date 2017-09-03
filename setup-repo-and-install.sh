@@ -36,6 +36,7 @@ else
 	git fetch
 
 	# Basic git configuration needed to commit
+
 	if ! git config --get user.email; then
 		git config user.email "anonymous@example.com"
 	fi
@@ -50,6 +51,7 @@ else
 		install_package meld
 		git config merge.tool "meld"
 	fi
+
 
 	# If there are uncommitted changes in index ...
 	if ! git diff-index --cached --quiet HEAD --ignore-submodules --; then
