@@ -26,14 +26,14 @@ function install_package() {
 	fi
 }
 
-if [ ! -d "$RPI2_CONF_DEST_DIR" ]; then
+if [ ! -d "$RPI2_CONF_DEST_DIR/.git" ]; then
 	git clone "$RPI2_CONF_REPO_URL" "$RPI2_CONF_DEST_DIR"
 	cd "$RPI2_CONF_DEST_DIR"
 else
 	cd "$RPI2_CONF_DEST_DIR"
 
 	# Test if this directory is a git repository
-	git fetch
+	git status
 
 	# Basic git configuration needed to commit
 

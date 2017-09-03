@@ -26,5 +26,5 @@
     cron_file: '{{rpi2_conf_repository_update_cron_file}}'
     user: '{{rpi2_conf_initial_user}}'
     job: '{{rpi2_conf_repository_update_script_path}}'
-    minute: 32
+    minute: 36
     hour: 3

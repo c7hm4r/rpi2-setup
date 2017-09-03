@@ -24,21 +24,21 @@
     name: '{{item.name}}'
     value: '{{item.value}}'
   with_items:
-    - name: failed_reboot_since_file
+    - name: FAILED_REBOOT_SINCE_FILE
       value: '{{rpi2_conf_failed_reboot_since_file}}'
-    - name: failed_urgent_reboot_since_file
+    - name: FAILED_URGENT_REBOOT_SINCE_FILE
       value: '{{rpi2_conf_failed_urgent_reboot_since_file}}'
-    - name: failed_reboot_timeout
+    - name: FAILED_REBOOT_TIMEOUT
       value: '{{rpi2_conf_failed_reboot_timeout}}'
-    - name: failed_urgent_reboot_timeout
+    - name: FAILED_URGENT_REBOOT_TIMEOUT
       value: '{{rpi2_conf_failed_urgent_reboot_timeout}}'
-    - name: time_to_log_out
+    - name: TIME_TO_LOG_OUT
       value: '{{rpi2_conf_time_to_log_out}}'
-    - name: no_restart_needed_output
+    - name: NO_RESTART_NEEDED_OUTPUT
       value: '{{rpi2_conf_no_restart_needed_output}}'
-    - name: reboot_wall_message
+    - name: REBOOT_WALL_MESSAGE
       value: '{{rpi2_conf_reboot_wall_message}}'
-    - name: reboot_deferred_message
+    - name: REBOOT_DEFERRED_MESSAGE
       value: '{{rpi2_conf_reboot_deferred_message}}'
 
 - name: Cronjob
