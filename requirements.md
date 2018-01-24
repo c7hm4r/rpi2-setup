@@ -13,11 +13,10 @@ This document shall keep track of next steps or ideas, primarily in the form of 
 
 ## Backlog
 
-- As a user I don’t want to rely on tiny.cc, because it does not seem so reliable which may lead to installation difficulties. Instead I want to depend only on a single trustworthy service like GitHub, for example.
-- As a user I only want to have a stable setup. As a developer or power user I want to test the newest things. So I would be convenient if the default installation procedure would employ a release branch (name `release`) whereas it should also be possible to check out a dev branch (name `dev`).
 - As a user I want to use [nsupdate.info](https://www.nsupdate.info/) to setup DynDNS to get a domain name, because it is recommended by [PRISM Break](https://prism-break.org/en/projects/nsupdateinfo/).
+    - As a user I want a fixed domain for my server to enable easy access from the internet.
 - As a user I want the homepage and later services secured with TLS to prevent hackers sniffing my data.
-- As a user I want a fixed domain for my server to enable easy access from the internet.
+- As a user I only want to have a stable setup. As a developer or power user I want to test the newest things. So I would be convenient if the default installation procedure would employ a release branch (name `release`) whereas it should also be possible to check out a dev branch (name `dev`).
 - As a user I want to have a simple status homepage under a fixed domain which proves that the server is online and that TLS works, because I want to know if the system could work in principal if I configure further services later.
 - As a user I want to know how the expected system costs, because I want to compare it to other existing services before I invest in this unpopular solution.
     - Sub tasks
@@ -33,3 +32,7 @@ This document shall keep track of next steps or ideas, primarily in the form of 
         - Create custom Raspbian image via [PiBakery](http://www.pibakery.org/).
 - As a user I want to have a graphical application which allows me to select the services I want, because maybe I don’t want to install everything.
 - As a user I want to prevent that my network is completely busy with the server requests, so I should throttle the speed of the server. (install wondershaper and estimate bandwidth by using a free distributed bandwidth measuring service)
+
+## Done (one-time)
+
+- As a user I don’t want to rely on tiny.cc, because it does not seem so reliable which may lead to installation difficulties. Instead I want to depend only on a single trustworthy service like GitHub, for example.
