@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# This script may be outdated.
-# It just downloads the update-script and executes it.
+# This script does not necessarily have to be up to date to be safely executed.
+# It just downloads the current update-script and executes it.
 
 if bash <<'EOF'
 set -e

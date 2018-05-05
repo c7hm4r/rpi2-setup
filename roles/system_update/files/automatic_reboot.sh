@@ -16,6 +16,7 @@
 set -e
 set -x
 
+# Writes a content string (second parameter) to the file (first parameter)
 function set_file_contents() {
 	local file_path=$1
 	local contents=$2
@@ -23,10 +24,12 @@ function set_file_contents() {
 	echo "$contents" >"$file_path"
 }
 
+# If it exitsts with 0, a reboot is required (could however miss some required reboots)
 function reboot_required() {
 	! checkrestart | grep -q "$NO_RESTART_NEEDED_OUTPUT"
 }
 
+# Exists with 0 iff apt says a reboot is needed
 function urgent_reboot_required() {
 	[ -f /var/run/reboot-required ]
 }
