@@ -26,6 +26,8 @@ function install_package() {
 	fi
 }
 
+install_package git
+
 if [ ! -d "$RPI2_CONF_DEST_DIR/.git" ]; then
 	git clone "$RPI2_CONF_REPO_URL" "$RPI2_CONF_DEST_DIR"
 	cd "$RPI2_CONF_DEST_DIR"
