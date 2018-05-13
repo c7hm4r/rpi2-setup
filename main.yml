@@ -12,9 +12,9 @@
     # Roles shall be configurable as needed
     - system_update
     - repository_update
+    - basis
 
     #- update
-    #- basis
     #- other_services
     #- human_tty
     #- nextcloud

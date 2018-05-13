@@ -20,24 +20,6 @@
     policy: allow
     direction: outgoing
 
-# SSHD
-- name: enable sshd port
-  ufw:
-    rule: allow
-    direction: in
-    to_port: 22
-    proto: tcp
-
-- name: enable sshd
-  systemd:
-    name: sshd.service
-    enabled: yes
-    masked: no
-- name: start sshd
-  systemd:
-    name: sshd.service
-    state: started
-
 ## SSH host keys
 # - name: check custom keys flag
 #   command: test -f "{{custom_ssh_host_keys_file}}"
@@ -67,6 +49,17 @@
   systemd:
     name: sshd.service
     state: restarted
+- name: enable sshd port
+  ufw:
+    rule: allow
+    direction: in
+    to_port: 22
+    proto: tcp
+- name: enable sshd
+  systemd:
+    name: sshd.service
+    enabled: yes
+    masked: no
 
 - name: enable ipv6
   modprobe:
