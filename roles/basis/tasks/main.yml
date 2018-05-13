@@ -69,3 +69,4 @@
   lineinfile:
     line: ipv6
     state: present
+    dest: /etc/modules
